@@ -1,5 +1,5 @@
 #! /Users/tannerwilliams/Desktop/ME 499/ME499_Lab_3_Dictionaries/sentiment.py
-
+import string
 
 def clean_txt(filename='sentiment.txt'):
     """
@@ -38,6 +38,20 @@ def load_score_dict(filename='sentiment.txt'):
     return clean_dict
 
 
+def get_words(sentence):
+    """
+    :param sentence: Complete sentence with at least one alphanumeric character
+    :return: list of strings containing individual lowercase words from sentence
+    """
+    case_words = sentence.lower()
+    print(case_words)
+    internal_punctuation = case_words.strip('-:')
+    print(internal_punctuation)
+    raw_words = internal_punctuation.split()
+    print(raw_words)
+    return
+
 if __name__ == "__main__":
     print('testing')
-    print(load_score_dict())
+    # print(load_score_dict())
+    get_words("Grocery list: 3 boxes Land-o-Lakes butter, Aunt Jemima's butter pancake mix")
