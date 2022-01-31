@@ -1,6 +1,7 @@
 #! /Users/tannerwilliams/Desktop/ME 499/ME499_Lab_3_Dictionaries/sentiment.py
 import string
 
+
 def clean_txt(filename='sentiment.txt'):
     """
     :param filename: local .txt file, default to sentiment.txt
