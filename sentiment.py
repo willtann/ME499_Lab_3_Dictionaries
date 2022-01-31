@@ -38,10 +38,6 @@ def load_score_dict(filename='sentiment.txt'):
     return clean_dict
 
 
-
-
-
-
 if __name__ == "__main__":
     print('testing')
     print(load_score_dict())
