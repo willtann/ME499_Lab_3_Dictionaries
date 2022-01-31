@@ -43,15 +43,23 @@ def get_words(sentence):
     :param sentence: Complete sentence with at least one alphanumeric character
     :return: list of strings containing individual lowercase words from sentence
     """
-    case_words = sentence.lower()
-    print(case_words)
-    internal_punctuation = case_words.strip('-:')
-    print(internal_punctuation)
-    raw_words = internal_punctuation.split()
-    print(raw_words)
-    return
+    # Making everything lowercase
+    lowercase = sentence.lower()
+
+    # Getting rid of internal punctuation
+    internal_punc = lowercase.replace('-', '')
+    internal_punc = internal_punc.replace(':', '')
+    internal_punc = internal_punc.replace("'", "")
+    internal_punc = internal_punc.replace(".", "")
+    internal_punc = internal_punc.replace(",", "")
+
+    # Breaking sentence into individual words
+    raw_words = internal_punc.split()
+
+    return raw_words
+
 
 if __name__ == "__main__":
     print('testing')
     # print(load_score_dict())
-    get_words("Grocery list: 3 boxes Land-o-Lakes butter, Aunt Jemima's butter pancake mix")
+    print(get_words("Grocery list: 3 boxes Land-o-Lakes butter, Aunt Jemima's butter pancake mix"))
