@@ -1,5 +1,4 @@
 #! /Users/tannerwilliams/Desktop/ME 499/ME499_Lab_3_Dictionaries/sentiment.py
-import string
 
 
 def clean_txt(filename='sentiment.txt'):
@@ -47,7 +46,7 @@ def get_words(sentence):
     # Making everything lowercase
     lowercase = sentence.lower()
 
-    # Getting rid of internal punctuation
+    # Getting rid of possible internal punctuation
     internal_punc = lowercase.replace('-', '')
     internal_punc = internal_punc.replace(':', '')
     internal_punc = internal_punc.replace("'", "")
