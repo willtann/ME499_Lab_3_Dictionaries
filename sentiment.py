@@ -85,4 +85,5 @@ def score_sentence(sentence, score_dict):
     return sum(myscores.values())
 
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
+#     print(load_score_dict())
