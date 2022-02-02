@@ -46,7 +46,7 @@ def get_words(sentence):
     :return: list of strings containing individual lowercase words from sentence
     """
     # Making everything lowercase
-    word_list = str(sentence.lower())
+    word_list = sentence.lower()
 
     # Possible punctuation from python
     possible_punc = string.punctuation
@@ -58,7 +58,11 @@ def get_words(sentence):
 
     # Breaking sentence into individual words
     word_list = word_list.split()
-    return word_list
+
+    # Get rid of any duplicate words by converting to dictionary and back to list
+    word_list_clean = list(dict.fromkeys(word_list))
+
+    return word_list_clean
 
 
 def score_sentence(sentence, score_dict):
@@ -85,5 +89,6 @@ def score_sentence(sentence, score_dict):
     return sum(myscores.values())
 
 
-# if __name__ == "__main__":
-#     print(load_score_dict())
+if __name__ == "__main__":
+    my_sentence = "Grocery list: 3 boxes Land-o-Lakes butter, Aunt Jemima's butter pancake mix"
+    print(get_words(my_sentence))
