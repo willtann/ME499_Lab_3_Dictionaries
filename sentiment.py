@@ -1,11 +1,22 @@
 #! /Users/tannerwilliams/Desktop/ME 499/ME499_Lab_3_Dictionaries/sentiment.py
 import string
 import sys
-import os
 
 
-cwd = os.getcwd()  # Get the current working directory (cwd)
-files = os.listdir(cwd)  # Get all the files in that directory
+def load_score_dict(filename='sentiment.txt'):
+    """
+    :param filename: local .txt file, default to sentiment.txt
+    :return: dictionary of form word [value]
+    """
+    # Clean any blank lines or '#' from indicated .txt file with clean_txt function
+    clean_list = clean_txt(filename)
+    # Making a dictionary to store in
+    clean_dict = {}
+    # Go through each pair in clean_list and separate into 'word': value format
+    for pair in clean_list:
+        name, value = pair[0], float(pair[1])
+        clean_dict[name] = value
+    return clean_dict
 
 
 def clean_txt(filename='sentiment.txt'):
@@ -27,22 +38,6 @@ def clean_txt(filename='sentiment.txt'):
                     temp_list.append(split_line)
 
     return temp_list
-
-
-def load_score_dict(filename='sentiment.txt'):
-    """
-    :param filename: local .txt file, default to sentiment.txt
-    :return: dictionary of form word [value]
-    """
-    # Clean any blank lines or '#' from indicated .txt file with clean_txt function
-    clean_list = clean_txt(filename)
-    # Making a dictionary to store in
-    clean_dict = {}
-    # Go through each pair in clean_list and separate into 'word': value format
-    for pair in clean_list:
-        name, value = pair[0], float(pair[1])
-        clean_dict[name] = value
-    return clean_dict
 
 
 def get_words(sentence):
@@ -96,12 +91,22 @@ def score_sentence(sentence, score_dict):
 
 if __name__ == "__main__":
     for arg in sys.argv[1:]:
-        # Getting sentiment.txt
+        # Getting sentiment.txt for scoring
         scoring_dict = load_score_dict()
-        # Score sentence
+        # Open and convert the file from user to a string
+        mytext = str(list(open(arg)))
+        # Score text according to the scoring dictionary
+        # 1. Turn string of text into a list of words without any punctuation or capitalization
+        # 2. Go through each word and apply scoring
+        # 3. Sum scores for given .txt
+        score = score_sentence(mytext, scoring_dict)
+        # How is sentiment looking
+        if score > 0:
+            print('Positive')
+        elif score < 0:
+            print('Negative')
+        else:
+            print('Neutral')
 
-        # print(sentence)
-        score = score_sentence(sentence, scoring_dict)
-        # print(score)
 
 
