@@ -1,7 +1,7 @@
 #! /Users/tannerwilliams/Desktop/ME 499/ME499_Lab_3_Dictionaries/sentiment.py
 import string
 import sys
-
+import os
 
 def load_score_dict(filename='sentiment.txt'):
     """
@@ -90,23 +90,24 @@ def score_sentence(sentence, score_dict):
 
 
 if __name__ == "__main__":
-    for arg in sys.argv[1:]:
-        # Getting sentiment.txt for scoring
-        scoring_dict = load_score_dict()
-        # Open and convert the file from user to a string
-        mytext = str(list(open(arg)))
-        # Score text according to the scoring dictionary
-        # 1. Turn string of text into a list of words without any punctuation or capitalization
-        # 2. Go through each word and apply scoring
-        # 3. Sum scores for given .txt
-        score = score_sentence(mytext, scoring_dict)
-        # How is sentiment looking
-        if score > 0:
-            print('Positive')
-        elif score < 0:
-            print('Negative')
-        else:
-            print('Neutral')
-
-
-
+    # Make sure two arguments are provided
+    if not (sys.argv[1:]):
+        raise Exception('Indicate a file after sentiment.py...')
+    else:
+        for arg in sys.argv[1:]:
+            # Getting sentiment.txt for scoring
+            scoring_dict = load_score_dict()
+            # Open and convert the file from user to a string
+            mytext = str(list(open(arg)))
+            # Score text according to the scoring dictionary
+            # 1. Turn string of text into a list of words without any punctuation or capitalization
+            # 2. Go through each word and apply scoring
+            # 3. Sum scores for given .txt
+            score = score_sentence(mytext, scoring_dict)
+            # How is sentiment looking
+            if score > 0:
+                print('Positive')
+            elif score < 0:
+                print('Negative')
+            else:
+                print('Neutral')
