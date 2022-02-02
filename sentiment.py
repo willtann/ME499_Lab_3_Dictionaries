@@ -1,7 +1,7 @@
 #! /Users/tannerwilliams/Desktop/ME 499/ME499_Lab_3_Dictionaries/sentiment.py
 import string
 import sys
-import os
+
 
 def load_score_dict(filename='sentiment.txt'):
     """
