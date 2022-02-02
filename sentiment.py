@@ -1,4 +1,6 @@
 #! /Users/tannerwilliams/Desktop/ME 499/ME499_Lab_3_Dictionaries/sentiment.py
+import string
+import sys
 
 
 def clean_txt(filename='sentiment.txt'):
@@ -44,22 +46,43 @@ def get_words(sentence):
     :return: list of strings containing individual lowercase words from sentence
     """
     # Making everything lowercase
-    lowercase = sentence.lower()
+    word_list = str(sentence.lower())
+
+    # Possible punctuation from python
+    possible_punc = string.punctuation
 
     # Getting rid of possible internal punctuation
-    internal_punc = lowercase.replace('-', '')
-    internal_punc = internal_punc.replace(':', '')
-    internal_punc = internal_punc.replace("'", "")
-    internal_punc = internal_punc.replace(".", "")
-    internal_punc = internal_punc.replace(",", "")
+    for punc in word_list:
+        if punc in possible_punc:
+            word_list = word_list.replace(punc, '')
 
     # Breaking sentence into individual words
-    raw_words = internal_punc.split()
+    word_list = word_list.split()
+    return word_list
 
-    return raw_words
+
+def score_sentence(sentence, score_dict):
+    """
+    :param sentence: any sentence in a string
+    :param score_dict: dictionary containing scores of words
+    :return: score of sentence
+    """
+    # Make sentence into a list of strings w/o punctuation
+    mywords = get_words(sentence)
+
+    # Convert word_list to a dictionary all equal to zero (score is a float)
+    myscores = score_dict.fromkeys(mywords, 0.0)
+
+    # Open dictionary with scores
+    # score_dict = load_score_dict(filename)
+
+    # Assign scores to words form sentence
+    for word in myscores.keys():  # Loop for each word in sentence
+        if word in score_dict.keys():  # Is the current word in the scoring dictionary
+            myscores[word] = score_dict[word]
+
+    # Sentence score
+    return sum(myscores.values())
 
 
 if __name__ == "__main__":
-    print('testing')
-    # print(load_score_dict())
-    print(get_words("Grocery list: 3 boxes Land-o-Lakes butter, Aunt Jemima's butter pancake mix"))
