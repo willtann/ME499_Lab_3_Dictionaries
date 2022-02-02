@@ -1,6 +1,11 @@
 #! /Users/tannerwilliams/Desktop/ME 499/ME499_Lab_3_Dictionaries/sentiment.py
 import string
 import sys
+import os
+
+
+cwd = os.getcwd()  # Get the current working directory (cwd)
+files = os.listdir(cwd)  # Get all the files in that directory
 
 
 def clean_txt(filename='sentiment.txt'):
@@ -90,5 +95,13 @@ def score_sentence(sentence, score_dict):
 
 
 if __name__ == "__main__":
-    my_sentence = "Grocery list: 3 boxes Land-o-Lakes butter, Aunt Jemima's butter pancake mix"
-    print(get_words(my_sentence))
+    for arg in sys.argv[1:]:
+        # Getting sentiment.txt
+        scoring_dict = load_score_dict()
+        # Score sentence
+
+        # print(sentence)
+        score = score_sentence(sentence, scoring_dict)
+        # print(score)
+
+
